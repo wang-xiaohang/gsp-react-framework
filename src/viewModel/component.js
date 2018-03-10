@@ -31,13 +31,17 @@ if (React) {
 				throw new Error("super(props,viewModel) must be called in constructor on " + this.constructor.name + "."); //added by wang-xh
 			}
 
-			var methods = [//modified by wang-xh removed  componentWillUpdate componentDidUpdate
-			"componentWillMount", "componentDidMount", "componentWillUnmount"];
+			var methods = [//modified by wang-xh removed  componentWillUpdate componentDidUpdate,add componentWillReceiveProps
+			"componentWillMount", "componentDidMount", "componentWillReceiveProps", "componentWillUnmount"];
 
 			methods.forEach(function (method) {
 				var methodAsString = this[method].toString();
 				if (this[method] !== Component.prototype[method] && !methodAsString.includes(method, methodAsString.indexOf(") {"))) {
-					throw new Error("super." + method + "() must be called on " + this.constructor.name + ".");
+					if (method === "componentWillReceiveProps") {
+						throw new Error("super." + method + "(nextProps) must be called on " + this.constructor.name + ".");
+					} else {
+						throw new Error("super." + method + "() must be called on " + this.constructor.name + ".");
+					}
 				}
 			}.bind(this));
 		}
