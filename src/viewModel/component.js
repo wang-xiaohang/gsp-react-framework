@@ -31,7 +31,8 @@ if (React) {
 				throw new Error("super(props,viewModel) must be called in constructor on " + this.constructor.name + "."); //added by wang-xh
 			}
 
-			var methods = ["componentWillMount", "componentDidMount", "componentWillUpdate", "componentDidUpdate", "componentWillUnmount"];
+			var methods = [//modified by wang-xh removed  componentWillUpdate componentDidUpdate
+			"componentWillMount", "componentDidMount", "componentWillUnmount"];
 
 			methods.forEach(function (method) {
 				var methodAsString = this[method].toString();
@@ -86,11 +87,11 @@ if (React) {
 		},
 
 		componentWillUpdate: function componentWillUpdate() {
-			this._observer.startLisening();
+			// this._observer.startLisening(); //modified by wang-xh
 		},
 
 		componentDidUpdate: function componentDidUpdate() {
-			this._observer.stopListening();
+			// this._observer.stopListening(); //modified by wang-xh
 		},
 
 		componentWillUnmount: function componentWillUnmount() {
