@@ -117,7 +117,7 @@ export default class App extends Component {
             ]}
         ```
     
-    - <code>getState()</code> 获取Object类型的state数据
+    - <code>getState(key)</code> 获取Object类型的state数据，若指定key值则返回key值对应的数据
     - <code>setState(object)</code> 增量修改state数据    
     - <code>bindDataToStorage()</code> View层绑定ViewModel中的数据源数据，需要在component.constructor中调用。
     - <code>initDataStorage(initData)</code> 根据初始数据构建storage
@@ -132,7 +132,7 @@ export default class App extends Component {
           
     - <code>getData()</code> 获取组件全量数据，返回数组类型
     
-    - <code>refreshData(data)</code> 全量刷新数据
+    - <code>loadData(data)</code> 全量刷新数据
     
     - <code>addRecord(data)</code> 新增一行记录，传入Object
         
@@ -199,6 +199,5 @@ export default class App extends Component {
 - **变量不可扩展性**
     
     viewModel中的变量是不可扩展的，若想在方法中新增this.XXX必须在constructor中声明才可以使用
-
 
 

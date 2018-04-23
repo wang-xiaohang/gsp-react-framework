@@ -40,12 +40,18 @@ var ViewModel = function () {
             });
             this.state = _immutable2.default.fromJS(state);
         }
-        //获取Object类型的state数据
+
+        //获取Object类型的state数据,若指定key值则返回key值对应的数据
 
     }, {
         key: "getState",
-        value: function getState() {
-            return this.state.toJS();
+        value: function getState(key) {
+            var obj = this.state.toJS();
+            if (!key || key === "") {
+                return obj;
+            } else {
+                return obj[key];
+            }
         }
         //根据初始数据和数据源对象构建storage
 
@@ -74,8 +80,8 @@ var ViewModel = function () {
         //重新构建数据集
 
     }, {
-        key: "refreshData",
-        value: function refreshData(data) {
+        key: "loadData",
+        value: function loadData(data) {
             this.dataStorage.load(data);
         }
         //新增记录
