@@ -167,7 +167,7 @@ export default class App extends Component {
         component.viewmodel.js：
         
         ```
-        save(component) {
+        save() {
             let subDatas = this.getSubData("tickeDetail");
             console.log("全量数据：" + subDatas);
 
