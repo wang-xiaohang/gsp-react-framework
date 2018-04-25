@@ -182,10 +182,25 @@ var DataStorage = function () {
                 fieldName: changeLog.fieldName
             });
         }
+
+        //获取entity类型的数组
+
     }, {
         key: "toArray",
         value: function toArray() {
             return this.innerList.toArray();
+        }
+        //获取纯数据数组
+
+    }, {
+        key: "toPlainArray",
+        value: function toPlainArray() {
+            var entityList = this.innerList.toArray();
+            var plainArray = [];
+            entityList.forEach(function (element) {
+                plainArray.push(element.innerMap.toJS());
+            });
+            return plainArray;
         }
     }, {
         key: "getChanges",

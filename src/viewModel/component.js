@@ -55,7 +55,8 @@ if (React) {
 		}
 		var ViewModel = viewModel || DefineMap;
 		var originProp = {
-			props: props
+			props: props,
+			refs: {}
 		};
 		this.viewModel = new ViewModel(originProp);
 	};
@@ -87,6 +88,7 @@ if (React) {
 		},
 
 		componentDidMount: function componentDidMount() {
+			this.viewModel.refs = this.refs;
 			this._observer.stopListening();
 		},
 

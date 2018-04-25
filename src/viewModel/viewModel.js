@@ -105,28 +105,28 @@ var ViewModel = function () {
         value: function getChanges() {
             return this.dataStorage.getChanges();
         }
-        //根据子组件上的ref标识来获取子组件增量
+        //根据子组件的ref标识来获取子组件增量数据
 
     }, {
         key: "getSubChanges",
-        value: function getSubChanges(component) {
-            var refObject = component.refs;
-            var subChangeSets = {};
-            Object.getOwnPropertyNames(refObject).forEach(function (refName) {
-                subChangeSets[refName] = refObject[refName].viewModel.dataStorage.getChanges();
-            });
+        value: function getSubChanges(subKey) {
+            var refObject = this.refs[subKey];
+            if (!refObject) {
+                return {};
+            }
+            var subChangeSets = refObject.viewModel.dataStorage.getChanges();
             return subChangeSets;
         }
-        //根据子组件上的ref标识来获取子组件data数据
+        //根据子组件的ref标识来获取子组件data数据
 
     }, {
         key: "getSubData",
-        value: function getSubData(component) {
-            var refObject = component.refs;
-            var subDatas = {};
-            Object.getOwnPropertyNames(refObject).forEach(function (refName) {
-                subDatas[refName] = refObject[refName].viewModel.dataStorage.toArray();
-            });
+        value: function getSubData(subKey) {
+            var refObject = this.refs[subKey];
+            if (!refObject) {
+                return {};
+            }
+            var subDatas = refObject.viewModel.dataStorage.toPlainArray();
             return subDatas;
         }
     }]);

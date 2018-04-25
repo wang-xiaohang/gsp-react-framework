@@ -151,9 +151,9 @@ export default class App extends Component {
     
     - <code>getChanges()</code> 获取组件增量数据
         
-    - <code>getSubChanges(component)</code> 获取子组件增量changes，传入Component this对象
+    - <code>getSubChanges(subKey)</code> 根据子组件的ref标识来获取子组件增量数据
     
-    - <code>getSubData(component)</code> 获取子组件全量数据。为子组件添加ref属性，click事件传入Component this对象
+    - <code>getSubData(subKey)</code> 根据子组件的ref标识来获取子组件全量数据
         
         component.js :
         
@@ -161,17 +161,17 @@ export default class App extends Component {
         <TicketDetailComponent rojpsqD_NM={state.rojpsqD_NM}
                     changeCXFWEvent={this.viewModel.changeCXFWEvent} ref="tickeDetail">
         </TicketDetailComponent>
-        <div onClick={this.viewModel.save.bind(this.viewModel, this)}>保存</div>
+        <div onClick={this.viewModel.save}>保存</div>
         ```
         
         component.viewmodel.js：
         
         ```
         save(component) {
-            let subDatas = this.getSubData(component);
+            let subDatas = this.getSubData("tickeDetail");
             console.log("全量数据：" + subDatas);
 
-            let subChanges = this.getSubChanges(component);
+            let subChanges = this.getSubChanges("tickeDetail");
             console.log("增量数据：" + subChanges);
             }
         ```
@@ -181,6 +181,10 @@ export default class App extends Component {
     基类ViewModel中封装了React.Component原生props属性，因此在viewModel子类中可以直接访问this.props.XXX
 
     Component中可以访问this.viewModel.props.XXX
+
+- **访问组件refs**
+    
+    在React中可以通过定义ref来更有针对性的获取元素，基类ViewModel中已经封装了refs属性，因此在viewModel子类中可以直接访问this.refs.XXX
 
 - **路由跳转**
     
